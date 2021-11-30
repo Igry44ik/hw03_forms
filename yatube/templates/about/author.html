@@ -3,13 +3,13 @@
 {% load static %}
 
 
-<title> {% block title %} Об авторе {% endblock %} </title>
+    {% block title %} Об авторе {% endblock %}
         {% block content %}
         <div class="px-4 my-4 text-center">
         <h1 class="display fw-bold">Об авторе</h1>
         </div>
         <div>
-            <img class="d-block mx-auto mb-4" src="{% static "img/my_photo.jpg" %}" alt="" width="300" height="400">
+            <img class="d-block mx-auto mb-4" src="{% static 'img/my_photo.jpg' %}" alt="" width="300" height="400">
             <div class="col-lg-6 mx-auto">
             <p class="lead mb-4"> Меня зовут Игорь Кулаков и я программист </p>
             <p class="lead mb-4"> Студент ЯП, который хочет стать лучше, чем был вчера!</p>

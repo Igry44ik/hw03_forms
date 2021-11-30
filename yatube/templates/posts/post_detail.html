@@ -13,9 +13,7 @@
             {% if post.group %}
               <li class="list-group-item">
                 Группа: {{ post.group }}
-                {% if post.group %}
                   <a href="{% url 'posts:slug' post.group.slug %}">Все записи группы</a>
-                {% endif %}
             {% endif %}
               </li>
               <li class="list-group-item">
@@ -41,5 +39,3 @@
         </article>
       </div>
     {% endblock %}
-
-

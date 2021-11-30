@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 
-  <title> {% block title %} Профайл пользователя {{ user.username }} {% endblock %} </title>
+  {% block title %} Профайл пользователя {{ user.username }} {% endblock %}
     {% block content %}
       <div class="container py-5">
         <h1> Все посты пользователя {{ user.username }} </h1>

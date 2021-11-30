@@ -9,7 +9,7 @@ from .models import Group, Post, User
 
 def index(request):
     post_list = Post.objects.all()
-    paginator = Paginator(post_list, 10)
+    paginator = Paginator(post_list, settings.QUANTITY_POSTS)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     context = {
@@ -34,7 +34,7 @@ def group_posts(request, slug):
 def profile(request, username):
     author = get_object_or_404(User, username=username)
     profile_list = author.posts.all()
-    paginator = Paginator(profile_list, 10)
+    paginator = Paginator(profile_list, settings.QUANTITY_POSTS)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
@@ -56,15 +56,11 @@ def post_detail(request, post_id):
 @login_required
 def post_create(request):
     """Функция создания нового поста"""
-    if request.method == "POST":
-        form = PostForm(request.POST or None)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
-            return redirect("posts:profile", username=post.author)
-    else:
-        form = PostForm()
+    form = PostForm(request.POST or None)
+    if form.is_valid():
+        form.instance.author = request.user
+        form.save()
+        return redirect("posts:profile", username=request.user)
     return render(request, "posts/create_post.html", {"form": form, })
 
 
@@ -75,13 +71,12 @@ def post_edit(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     if post.author != request.user:
         return redirect("posts:post_detail", post_id=post.id)
-    if request.method == "POST":
-        form = PostForm(request.POST or None, instance=post)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.save()
-            return redirect("posts:post_detail", post_id=post.id)
+
+    form = PostForm(request.POST or None, instance=post)
+    if form.is_valid():
+        form.save()
+        return redirect("posts:post_detail", post_id=post.id)
     else:
-        form = PostForm(instance=post)
+        form = PostForm()
     return render(request, "posts/create_post.html",
                   {"form": form, "post": post, "is_edit": is_edit, })

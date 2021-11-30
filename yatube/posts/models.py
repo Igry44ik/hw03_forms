@@ -22,8 +22,8 @@ class Post(models.Model):
                               related_name="posts", verbose_name="Группа",
                               blank=True, null=True)
 
-    def __str__(self) -> str:
-        return self.text
-
     class Meta:
         ordering = ["-pub_date"]
+
+    def __str__(self) -> str:
+        return self.text

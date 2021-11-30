@@ -1,11 +1,7 @@
 {% extends "base.html" %}
 
-
-<head>    
-  <title> {% block title %} Последние обновления на сайте {% endblock %} </title>
-</head>
-<body>
-  <main>       
+   
+  {% block title %} Последние обновления на сайте {% endblock %}
     <h1> {% block header %}Последние обновления на сайте{% endblock %} </h1>
      {% block content%}
       <div class="container py-1">
@@ -31,5 +27,3 @@
       </div>
       {% include "posts/includes/paginator.html" %}
     {% endblock %}
-  </main>
-</body>
