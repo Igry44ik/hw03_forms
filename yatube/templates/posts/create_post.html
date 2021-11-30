@@ -3,7 +3,6 @@
 
   {%block title %}{% if is_edit %}Редактирование поста{% else %}Добавление нового поста{% endif %} {% endblock %}
     {% block content%}
-    <main>
       <div class="container py-5">
         <div class="row justify-content-center">
           <div class="col-md-8 p-5">
@@ -28,8 +27,7 @@
                 {% endfor %}
               {% endif %}
                 <form method="post">
-                {% for field in form %}
-                  <input type="hidden" name="csrfmiddlewaretoken" value="">         
+                {% for field in form %} 
                   <div class="form-group row my-3 p-3">
                   <label for="{{ field.id_for_label }}">   
                       {{ field.label }}
@@ -62,6 +60,5 @@
           </div>
         </div>
       </div>
-    </main>
   {% endblock %}
  

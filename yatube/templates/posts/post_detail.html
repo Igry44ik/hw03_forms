@@ -1,12 +1,8 @@
 {% extends "base.html" %}
 
 
-  <head>
     <!-- Подключены иконки, стили и заполенены мета теги -->
-     {% block title %} Пост {{post.text|truncatechars:30}} {% endblock %}
-  </head>
-  <body>
-    <main>
+    {% block title %} Пост {{ post.text|truncatechars:30 }} {% endblock %}
     {% block content %}
       <div class="row">
         <aside class="col-12 col-md-3">
@@ -14,12 +10,13 @@
             <li class="list-group-item">
               Дата публикации: {{ post.pub_date|date:"d E Y" }}
             </li>
-            <!-- если у поста есть группа -->
+            {% if post.group %}
               <li class="list-group-item">
                 Группа: {{ post.group }}
                 {% if post.group %}
                   <a href="{% url 'posts:slug' post.group.slug %}">Все записи группы</a>
                 {% endif %}
+            {% endif %}
               </li>
               <li class="list-group-item">
                 Автор: {{ post.author.username }}
@@ -44,6 +41,5 @@
         </article>
       </div>
     {% endblock %}
-    </main>
-  </body>
+
 
